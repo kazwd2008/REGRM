@@ -1,6 +1,6 @@
 #################################################################################################
 #################################################################################################
-#  Robust estimators for the generalised ratio model　
+#  Robust estimators for the generalised ratio model
 #         by iteratively re-weighted least squares (IRLS) algorithm 
 #    Weight function:  Tukey's biweight function
 #    Scale: Average absolute deviation (AAD) or median absolute deviation (MAD)
@@ -14,7 +14,7 @@
 #	                          when all weights (w1) become zero.
 #------------------------------------------------------------------------------------------------#
 #  Functions  
-# 	RrTa.aad: Gamma = 1,   AAD scale  　　　　　　                     
+# 	RrTa.aad: Gamma = 1,   AAD scale  
 # 	RrTb.aad: Gamma = 1/2, AAD scale (conventional ratio model)
 # 	RrTc.aad: Gamma = 0,   AAD scale (single regression without intercept)
 # 	RrTa.mad: Gamma = 1,   MAD scale* 
