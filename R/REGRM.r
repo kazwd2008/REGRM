@@ -94,7 +94,7 @@ REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, dat="", rp.max=100,
   c3 <- c2/2-1  # (4, 6, 8) => (1, 2, 3)
 
   if (wf=="T") {
-     source("RrT.r")
+     # source("RrT.r")
      if (scale=="AAD"){
 
         c1 <- switch(c3, 4, 6, 8)
@@ -114,7 +114,7 @@ REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, dat="", rp.max=100,
   }
 
   if (wf=="H") {
-     source("RrH.r")
+     # source("RrH.r")
      if (scale=="AAD"){
 
         c1 <- switch(c3, 1.15, 1.72, 2.30)

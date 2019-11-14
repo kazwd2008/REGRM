@@ -58,8 +58,7 @@ Sample code
 -----------
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("kazwd2008/REGRM")
+require(REGRM)
 
 x <- seq(1, 10, by=0.1)
 #e <- rnorm(length(x))
@@ -75,6 +74,7 @@ o1 <- REGRM(x, y1, gm="a")
 o2 <- REGRM(x, y2, gm="b")
 
 o1$par;  o2$par     # estimated slope
+
 require(RColorBrewer)
 cols = brewer.pal(11, "PiYG")
 cl1 <- round((o1$wt)*10+1)  
