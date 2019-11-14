@@ -85,10 +85,10 @@
 REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, dat="", rp.max=100, cg.rt=0.01){
 
 #----------------------------------------------- check arguments
-  stopifnot(gm="a", gm="b", gm="c")
-  stopifnot(wf="T", wt="H")
-  stopifnot(scale="AAD", scale="MAD")
-  stopifnot(c1=4, c1=6, c1=8)
+  stopifnot(gm=="a"| gm=="b"| gm=="c")
+  stopifnot(wf=="T" | wf=="H")
+  stopifnot(scale=="AAD"| scale=="MAD")
+  stopifnot(c2==4 | c2==6 | c2==8)
 
 #----------------------------------------------- select an appropriate function
   c3 <- c2/2-1  # (4, 6, 8) => (1, 2, 3)
@@ -110,7 +110,7 @@ REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, dat="", rp.max=100,
         if (gm=="c") ot <- RrTc.mad(x1, y1, c1, dat, rp.max, cg.rt)
 
      }
-     return(list(par=ot$par, res=ot$res, wt=ot$w1, rp=ot$rp1, s1=ot$s1.cg, efg=ot$efg))
+     return(list(par=ot$par, res=ot$res, wt=ot$wt, rp=ot$rp, s1=ot$s1, efg=ot$efg))
   }
 
   if (wf=="H") {
@@ -130,7 +130,7 @@ REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, dat="", rp.max=100,
         if (gm=="c") ot <- RrHc.mad(x1, y1, c1, dat, rp.max, cg.rt)
 
      }
-     return(list(par=ot$par, res=ot$res, wt=ot$w1, rp=ot$rp1, s1=ot$s1.cg, efg=ot$efg))
+     return(list(par=ot$par, res=ot$res, wt=ot$wt, rp=ot$rp, s1=ot$s1, efg=ot$efg))
   }
 
   return(list(par=NA, res=NA, wt=NA, rp=0, s1=NA, efg=1))
