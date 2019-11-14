@@ -44,8 +44,6 @@ If a user wish to select other values of the tuning parameter, any child functio
 | Huber AAD     | 1.15        | 1.72 | 2.30        | 2.30    |
 | Huber MAD(SD) | 1.44        | 2.16 | 2.88        | 2.88    |
 
-Please note Smaller figure provides more robust estimation. As for the function REGRM, tuning parameter c2 accepts only 4, 6 and 8. It will be converted appropriately when REGRAM internally calls an appropriate functions.
-
 Installation
 ------------
 
