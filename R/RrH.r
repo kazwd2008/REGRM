@@ -24,7 +24,6 @@
 #   x1      single explanatory variable
 #   y1      objective variable
 #   c1      tuning parameter for Huber's weight function (Huber's k)
-#   dat     name of dataframe (if necessary) in which x1 and y1 are included
 #   rp.max  maximum number of iteration (default setting : 100)
 #------------------------------------------------------------------------------------------------#
 #   Recommended range of tuning parameter c1 for Huber's weight function
@@ -51,7 +50,6 @@
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 1.15 to 2.30 for the scale parameter of AAD(average absolute deviation)
 #'           and from 1.44 to 2.88 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -67,9 +65,8 @@
 #################################################################################################
 # 	RrHa :   gamma = 1
 #------------------------------------------------------------------------------------------------#
-RrHa.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
+RrHa.aad <- function(x1, y1, c1=2.3, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1) # prevent overflow
 
   s1.cg <- rep(0, rp.max)               	# preserve changes in s1 (scale)
@@ -99,7 +96,6 @@ RrHa.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
       if (abs(1-s1/s0) < cg.rt) break           # convergence condition
       s0 <- s1
    }
-    if (dat!="") detach(get(dat))
     return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -113,7 +109,6 @@ RrHa.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 1.15 to 2.30 for the scale parameter of AAD(average absolute deviation)
 #'           and from 1.44 to 2.88 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -128,9 +123,8 @@ RrHa.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
 #' @importFrom stats mad
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrHa.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
+RrHa.mad <- function(x1, y1, c1=2.88, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1) # prevent overflow
 
   s1.cg <- rep(0, rp.max)               	# preserve changes in s1 (scale)
@@ -160,7 +154,6 @@ RrHa.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
       if (abs(1-s1/s0) < cg.rt) break           # convergence condition
       s0 <- s1
    }
-    if (dat!="") detach(get(dat))
     return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -176,7 +169,6 @@ RrHa.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 1.15 to 2.30 for the scale parameter of AAD(average absolute deviation)
 #'           and from 1.44 to 2.88 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -190,9 +182,8 @@ RrHa.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
 #'
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrHb.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
+RrHb.aad <- function(x1, y1, c1=2.3, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)                        # preserve changes in s1 (scale)
@@ -222,7 +213,6 @@ RrHb.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
       if (abs(1-s1/s0) < cg.rt) break            # convergence condition
       s0 <- s1
     }
-    if (dat!="") detach(get(dat))
     return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -237,7 +227,6 @@ RrHb.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 1.15 to 2.30 for the scale parameter of AAD(average absolute deviation)
 #'           and from 1.44 to 2.88 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -252,9 +241,8 @@ RrHb.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
 #' @importFrom stats mad
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrHb.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
+RrHb.mad <- function(x1, y1, c1=2.88, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)                        # preserve changes in s1 (scale)
@@ -284,7 +272,6 @@ RrHb.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
       if (abs(1-s1/s0) < cg.rt) break            # convergence condition
       s0 <- s1
     }
-    if (dat!="") detach(get(dat))
     return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -300,7 +287,6 @@ RrHb.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 1.15 to 2.30 for the scale parameter of AAD(average absolute deviation)
 #'           and from 1.44 to 2.88 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -314,9 +300,8 @@ RrHb.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
 #'
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrHc.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
+RrHc.aad <- function(x1, y1, c1=2.3, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)                        # preserve changes in s1 (scale)
@@ -345,7 +330,6 @@ RrHc.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
         if (abs(1-s1/s0) < cg.rt) break             # convergence condition
         s0 <- s1
     }
-    if (dat!="") detach(get(dat))
     return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 #------------------------------------------------------------------------------------------------#
@@ -375,7 +359,6 @@ RrHc.aad <- function(x1, y1, c1=2.3, dat="", rp.max=100, cg.rt=0.01) {
 #------------------------------------------------------------------------------------------------#
 RrHc.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)                        # preserve changes in s1 (scale)
@@ -404,7 +387,6 @@ RrHc.mad <- function(x1, y1, c1=2.88, dat="", rp.max=100, cg.rt=0.01) {
         if (abs(1-s1/s0) < cg.rt) break             # convergence condition
         s0 <- s1
     }
-    if (dat!="") detach(get(dat))
     return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 #################################################################################################

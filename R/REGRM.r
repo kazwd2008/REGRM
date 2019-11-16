@@ -19,7 +19,6 @@
 #   wf       weight function (wf=T : Tukey, wf=H : Huber)
 #   scale    scale parameter (scale=AAD; scale=MAD)
 #   c2       tuning parameter (c1=4, 6, 8) see the table of "Tuning parameter c1" below
-#   dat      name of the dataframe containing x1 and y1 if any
 #   rp.max   maximum number of iteration (default: rp.max=100)
 #   cg.rt    convergence condition to stop iteration (default: cg1=0.001)
 #---------------------------------------------------------------------------------------------#
@@ -63,7 +62,6 @@
 #' @param wf weight function (wf=T : Tukey, wf=H : Huber) \cr
 #' @param scale scale parameter (scale=AAD; scale=MAD)
 #' @param c2 tuning parameter (c2=4, 6, 8) for weight function. Smaller figure is more robust.
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #' @return a list with the following elements
@@ -82,7 +80,7 @@
 #'
 #' ## End(Not run)
 #
-REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, dat="", rp.max=100, cg.rt=0.01){
+REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, rp.max=100, cg.rt=0.01){
 
 #----------------------------------------------- check arguments
   stopifnot(gm=="a"| gm=="b"| gm=="c")
@@ -98,16 +96,16 @@ REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, dat="", rp.max=100,
      if (scale=="AAD"){
 
         c1 <- switch(c3, 4, 6, 8)
-        if (gm=="a") ot <- RrTa.aad(x1, y1, c1, dat, rp.max, cg.rt)
-        if (gm=="b") ot <- RrTb.aad(x1, y1, c1, dat, rp.max, cg.rt)
-        if (gm=="c") ot <- RrTc.aad(x1, y1, c1, dat, rp.max, cg.rt)
+        if (gm=="a") ot <- RrTa.aad(x1, y1, c1, rp.max, cg.rt)
+        if (gm=="b") ot <- RrTb.aad(x1, y1, c1, rp.max, cg.rt)
+        if (gm=="c") ot <- RrTc.aad(x1, y1, c1, rp.max, cg.rt)
 
      } else {
 
         c1 <- switch(c3, 5.01, 7.52, 10.03)  # tuning constant for SD (MAD in R)
-        if (gm=="a") ot <- RrTa.mad(x1, y1, c1, dat, rp.max, cg.rt)
-        if (gm=="b") ot <- RrTb.mad(x1, y1, c1, dat, rp.max, cg.rt)
-        if (gm=="c") ot <- RrTc.mad(x1, y1, c1, dat, rp.max, cg.rt)
+        if (gm=="a") ot <- RrTa.mad(x1, y1, c1, rp.max, cg.rt)
+        if (gm=="b") ot <- RrTb.mad(x1, y1, c1, rp.max, cg.rt)
+        if (gm=="c") ot <- RrTc.mad(x1, y1, c1, rp.max, cg.rt)
 
      }
      return(list(par=ot$par, res=ot$res, wt=ot$wt, rp=ot$rp, s1=ot$s1, efg=ot$efg))
@@ -118,16 +116,16 @@ REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, dat="", rp.max=100,
      if (scale=="AAD"){
 
         c1 <- switch(c3, 1.15, 1.72, 2.30)
-        if (gm=="a") ot <- RrHa.aad(x1, y1, c1, dat, rp.max, cg.rt)
-        if (gm=="b") ot <- RrHb.aad(x1, y1, c1, dat, rp.max, cg.rt)
-        if (gm=="c") ot <- RrHc.aad(x1, y1, c1, dat, rp.max, cg.rt)
+        if (gm=="a") ot <- RrHa.aad(x1, y1, c1, rp.max, cg.rt)
+        if (gm=="b") ot <- RrHb.aad(x1, y1, c1, rp.max, cg.rt)
+        if (gm=="c") ot <- RrHc.aad(x1, y1, c1, rp.max, cg.rt)
 
      } else {
 
         c1 <- switch(c3, 1.44, 2.16, 2.88)  # tuning constant for SD (MAD in R)
-        if (gm=="a") ot <- RrHa.mad(x1, y1, c1, dat, rp.max, cg.rt)
-        if (gm=="b") ot <- RrHb.mad(x1, y1, c1, dat, rp.max, cg.rt)
-        if (gm=="c") ot <- RrHc.mad(x1, y1, c1, dat, rp.max, cg.rt)
+        if (gm=="a") ot <- RrHa.mad(x1, y1, c1, rp.max, cg.rt)
+        if (gm=="b") ot <- RrHb.mad(x1, y1, c1, rp.max, cg.rt)
+        if (gm=="c") ot <- RrHc.mad(x1, y1, c1, rp.max, cg.rt)
 
      }
      return(list(par=ot$par, res=ot$res, wt=ot$wt, rp=ot$rp, s1=ot$s1, efg=ot$efg))

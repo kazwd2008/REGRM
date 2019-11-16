@@ -6,7 +6,7 @@
               with Huber's weight function and MAD scal
               by iteratively re-weighted least squares (IRLS) algorithm for M-estimation}
 \usage{
-RrHa.mad(x1, y1, c1 = 2.88, dat = "", rp.max = 100, cg.rt = 0.01)
+RrHa.mad(x1, y1, c1 = 2.88, rp.max = 100, cg.rt = 0.01)
 }
 \arguments{
 \item{x1}{single explanatory variable}
@@ -15,8 +15,6 @@ RrHa.mad(x1, y1, c1 = 2.88, dat = "", rp.max = 100, cg.rt = 0.01)
 
 \item{c1}{tuning parameter from 1.15 to 2.30 for the scale parameter of AAD(average absolute deviation)
 and from 1.44 to 2.88 for the scale parameter of MAD(median absolute deviation)}
-
-\item{dat}{name of the dataframe containing x1 and y1 if any}
 
 \item{rp.max}{maximum number of iteration}
 

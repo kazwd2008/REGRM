@@ -6,7 +6,7 @@
        with Tukey biweight function and AAD scale
        by iteratively re-weighted least squares (IRLS) algorithm for M-estimation}
 \usage{
-RrTb.aad(x1, y1, c1 = 8, dat = "", rp.max = 10, cg.rt = 0.01)
+RrTb.aad(x1, y1, c1 = 8, rp.max = 100, cg.rt = 0.01)
 }
 \arguments{
 \item{x1}{single explanatory variable}
@@ -15,8 +15,6 @@ RrTb.aad(x1, y1, c1 = 8, dat = "", rp.max = 10, cg.rt = 0.01)
 
 \item{c1}{tuning parameter from 4 to 8 for the scale parameter of AAD(average absolute deviation)
 and from 5.01 to 10.03 for the scale parameter of MAD(median absolute deviation)}
-
-\item{dat}{name of the dataframe containing x1 and y1 if any}
 
 \item{rp.max}{maximum number of iteration}
 

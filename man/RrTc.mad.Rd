@@ -6,7 +6,7 @@
        with Tukey biweight function and MAD scale
        by iteratively re-weighted least squares (IRLS) algorithm for M-estimation}
 \usage{
-RrTc.mad(x1, y1, c1 = 10.03, dat = "", rp.max = 50, cg.rt = 0.01)
+RrTc.mad(x1, y1, c1 = 10.03, rp.max = 100, cg.rt = 0.01)
 }
 \arguments{
 \item{x1}{single explanatory variable}
@@ -15,8 +15,6 @@ RrTc.mad(x1, y1, c1 = 10.03, dat = "", rp.max = 50, cg.rt = 0.01)
 
 \item{c1}{tuning parameter from 4 to 8 for the scale parameter of AAD(average absolute deviation)
 and from 5.01 to 10.03 for the scale parameter of MAD(median absolute deviation)}
-
-\item{dat}{name of the dataframe containing x1 and y1 if any}
 
 \item{rp.max}{maximum number of iteration}
 

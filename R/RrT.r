@@ -27,7 +27,6 @@
 #   x1      single explanatory variable
 #   y1      objective variable
 #   c1      tuning parameter for Tukey's biweight function
-#   dat     name of dataframe (if necessary) in which x1 and y1 are included
 #   rp.max  maximum number of iteration (default setting : 100)
 #------------------------------------------------------------------------------------------------#
 #   Recommended range of tuning parameter for Tukey's biweight function
@@ -54,7 +53,6 @@
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 4 to 8 for the scale parameter of AAD(average absolute deviation)
 #'           and from 5.01 to 10.03 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -70,9 +68,8 @@
 #################################################################################################
 # 	RrTa :   gamma = 1
 #------------------------------------------------------------------------------------------------#
-RrTa.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
+RrTa.aad <- function(x1, y1, c1=8, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)                        # preserve changes in s1 (scale)
@@ -103,7 +100,6 @@ RrTa.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
       if (abs(1-s1/s0) < cg.rt) break           # convergence condition
       s0 <- s1
     }
-    if (dat!="") detach(get(dat))
     return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -118,7 +114,6 @@ RrTa.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 4 to 8 for the scale parameter of AAD(average absolute deviation)
 #'           and from 5.01 to 10.03 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -133,9 +128,8 @@ RrTa.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
 #' @importFrom stats mad
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrTa.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
+RrTa.mad <- function(x1, y1, c1=10.03, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)               	 # preserve changes in s1 (scale)
@@ -166,7 +160,6 @@ RrTa.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
       if (abs(1-s1/s0) < cg.rt) break           # convergence condition
       s0 <- s1
     }
-    if (dat!="") detach(get(dat))
 	return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -182,7 +175,6 @@ RrTa.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 4 to 8 for the scale parameter of AAD(average absolute deviation)
 #'           and from 5.01 to 10.03 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -196,9 +188,8 @@ RrTa.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
 #'
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrTb.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
+RrTb.aad <- function(x1, y1, c1=8, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1) # prevent overflow
 
   s1.cg <- rep(0, rp.max)                	# preserve changes in s1 (scale)
@@ -229,7 +220,6 @@ RrTb.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
         if (abs(1-s1/s0) < cg.rt) break           # convergence condition
         s0 <- s1
     }
-    if (dat!="") detach(get(dat))
 	return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -244,7 +234,6 @@ RrTb.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 4 to 8 for the scale parameter of AAD(average absolute deviation)
 #'           and from 5.01 to 10.03 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -259,9 +248,8 @@ RrTb.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
 #' @importFrom stats mad
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrTb.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
+RrTb.mad <- function(x1, y1, c1=10.03, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)                # preserve changes in s1 (scale)
@@ -292,7 +280,6 @@ RrTb.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
         if (abs(1-s1/s0) < cg.rt) break                 # convergence condition
         s0 <- s1
     }
-    if (dat!="") detach(get(dat))
 	return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -309,7 +296,6 @@ RrTb.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 4 to 8 for the scale parameter of AAD(average absolute deviation)
 #'           and from 5.01 to 10.03 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -323,9 +309,8 @@ RrTb.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
 #'
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrTc.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
+RrTc.aad <- function(x1, y1, c1=8, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)                        # preserve changes in s1 (scale)
@@ -356,7 +341,6 @@ RrTc.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
         if (abs(1-s1/s0) < cg.rt) break                   # convergence condition
         s0 <- s1
     }
-    if (dat!="") detach(get(dat))
 	return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 
@@ -371,7 +355,6 @@ RrTc.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
 #' @param y1 objective variable to be imputed
 #' @param c1 tuning parameter from 4 to 8 for the scale parameter of AAD(average absolute deviation)
 #'           and from 5.01 to 10.03 for the scale parameter of MAD(median absolute deviation)
-#' @param dat name of the dataframe containing x1 and y1 if any
 #' @param rp.max maximum number of iteration
 #' @param cg.rt convergence condition to stop iteration (default: cg1=0.001)
 #'
@@ -386,9 +369,8 @@ RrTc.aad <- function(x1, y1, c1=8, dat="", rp.max=10, cg.rt=0.01) {
 #' @importFrom stats mad
 #' @export
 #------------------------------------------------------------------------------------------------#
-RrTc.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
+RrTc.mad <- function(x1, y1, c1=10.03, rp.max=100, cg.rt=0.01) {
 
-  if (dat!="") attach(get(dat))
   x1 <- as.numeric(x1);    y1 <- as.numeric(y1)  # prevent overflow
 
   s1.cg <- rep(0, rp.max)                   	 # preserve changes in s1 (scale)
@@ -419,7 +401,6 @@ RrTc.mad <- function(x1, y1, c1=10.03, dat="", rp.max=50, cg.rt=0.01) {
         if (abs(1-s1/s0) < cg.rt) break                 # convergence condition
         s0 <- s1
     }
-    if (dat!="") detach(get(dat))
 	return(list(par = par, res=res, wt=w1, rp=rp1, s1=s1.cg, efg=efg))
   }
 #################################################################################################

@@ -6,7 +6,7 @@
               by iteratively re-weighted least squares (IRLS) algorithm for M-estimation}
 \usage{
 REGRM(x1, y1, gm = "b", wf = "T", scale = "AAD", c2 = 8,
-  dat = "", rp.max = 100, cg.rt = 0.01)
+  rp.max = 100, cg.rt = 0.01)
 }
 \arguments{
 \item{x1}{single explanatory variable}
@@ -23,8 +23,6 @@ gm="c"; gamma=0    (regression model without intercept) \cr}
 \item{scale}{scale parameter (scale=AAD; scale=MAD)}
 
 \item{c2}{tuning parameter (c2=4, 6, 8) for weight function. Smaller figure is more robust.}
-
-\item{dat}{name of the dataframe containing x1 and y1 if any}
 
 \item{rp.max}{maximum number of iteration}
 
