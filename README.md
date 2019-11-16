@@ -9,7 +9,7 @@ The goal of REGRM is to provide convenient tools for robust estimation of a gene
 
 The conventional ratio model *y*<sub>*i*</sub> = *β**x*<sub>*i*</sub> + *ϵ*<sub>*i*</sub> has the heteroscedastic error term *ϵ* and this is the obstacle to have robust estimation by means fo M-estimator.
 
-We re-defined the model with homoscedastic error term *ε*, and then generalized and robustified using the iteratively re-weighted least squares (IRLS) algorithm.
+The ratio model is re-defined with homoscedastic error term *ε*, generalized with the power *γ* to *ε*, and robustified by means of M-estimation. The algorithm used is the iteratively re-weighted least squares (IRLS).
 
 The corresponding estimator is shown as follows:
 
@@ -18,7 +18,7 @@ $$
 $$
  where *w*<sub>*i*</sub> is obtained by a weight function. The conventional ratio model is obtained when *γ* = 1/2.
 
-We have two different weight functions, two different scale prameters, and three choices of the gamma value. There are 12 functions according to these settings.
+Two different weight functions, two different scale prameters, and three choices of the gamma value can be used. There are 12 functions according to these settings.
 
 Functions included
 ------------------
