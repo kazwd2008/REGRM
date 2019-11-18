@@ -47,11 +47,28 @@
 #' @title REGRM: Robust estimator for a generalized ratio model
 #'               by iteratively re-weighted least squares (IRLS) algorithm for M-estimation
 #'
-#' @description REGRAM function integrates 12 functions included in RrT.r and RrH.r for easy
+#' @description REGRAM function integrates 12 functions below included in RrT.r and RrH.r for easy
 #'              use for users.  Please note that the values for the tuning parameter c2
 #'              allowed in this function is standardized and limited.  If you prefer to use
 #'              other values, please use the functions contained in RrT.r and/or RrH.r directly.
 #'              The turning parameters of those functions are not standardized.
+#'
+#' @details Child functions included RrT.r using Tukey's biweight function and RrH.r of Huber
+#' weight function.  AAD stands for Average Absolute Deviation and MAD, Median Absolute Deviation.
+#'
+#' * RrTa.aad: Tukey's biweight function & AAD, gamma=1
+#' * RrTb.aad: Tukey's biweight function & AAD, gamma=1/2
+#' * RrTc.aad: Tukey's biweight function & AAD, gamma=0
+#' * RrTa.mad: Tukey's biweight function & MAD, gamma=1
+#' * RrTb.mad: Tukey's biweight function & MAD, gamma=1/2
+#' * RrTc.mad: Tukey's biweight function & MAD, gamma=0
+#' * RrHa.aad: Huber's weight function & AAD, gamma=1
+#' * RrHb.aad: Huber's weight function & AAD, gamma=1/2
+#' * RrHc.aad: Huber's weight function & AAD, gamma=0
+#' * RrHa.mad: Huber's weight function & MAD, gamma=1
+#' * RrHb.mad: Huber's weight function & MAD, gamma=1/2
+#' * RrHc.mad: Huber's weight function & MAD, gamma=0
+#' @md
 #'
 #' @param x1 single explanatory variable
 #' @param y1 objective variable to be imputed
@@ -76,10 +93,33 @@
 #' @export
 #'
 #' @examples
-#' ## Not run:
+#' \dontrun{
+#' require(REGRM)
 #'
-#' ## End(Not run)
-#
+#' x <- seq(1, 10, by=0.1)
+#' #e <- rnorm(length(x))
+#' e <- rt(length(x), df=3)   # error term following t distribution
+#'
+#' b <- 2		# true value of slope
+#'
+#' y1 <- b*x + x*e			# example 1: gamma=1
+#' y2 <- b*x + sqrt(x)*e   # example 2: gamma=1/2
+#'
+#' o1 <- REGRM(x, y1, gm="a")
+#' o2 <- REGRM(x, y2, gm="b")
+#'
+#' o1$par;  o2$par     # estimated slope
+#'
+#' require(RColorBrewer)
+#' cols = brewer.pal(11, "PiYG")
+#' cl1 <- round((o1$wt)*10+1)
+#' cl2 <- round((o2$wt)*10+1)
+#'
+#' par(mfrow=c(1,2))
+#' plot(x, y1, col=cols[cl1], pch=20)
+#' plot(x, y2, col=cols[cl2], pch=20)
+#' }
+#'
 REGRM <- function(x1, y1, gm="b", wf="T", scale="AAD", c2=8, rp.max=100, cg.rt=0.01){
 
 #----------------------------------------------- check arguments

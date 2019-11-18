@@ -67,33 +67,3 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("kazwd2008/REGRM")
 ```
 
-## Sample code
-
-``` {r eval=FALSE}
-require(REGRM)
-
-x <- seq(1, 10, by=0.1)
-#e <- rnorm(length(x))
-e <- rt(length(x), df=3)   # error term following t distribution
-
-b <- 2		# true value of slope
-
-y1 <- b*x + x*e			# example 1: gamma=1
-y2 <- b*x + sqrt(x)*e   # example 2: gamma=1/2
-
-
-o1 <- REGRM(x, y1, gm="a")
-o2 <- REGRM(x, y2, gm="b")
-
-o1$par;  o2$par     # estimated slope
-
-require(RColorBrewer)
-cols = brewer.pal(11, "PiYG")
-cl1 <- round((o1$wt)*10+1)  
-cl2 <- round((o2$wt)*10+1)  
-   
-par(mfrow=c(1,2))
-plot(x, y1, col=cols[cl1], pch=20)
-plot(x, y2, col=cols[cl2], pch=20)
-
-```
