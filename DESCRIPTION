@@ -2,7 +2,7 @@ Package: REGRM
 Type: Package
 Title: Robust Estimators for a Generalized Ratio Model
 Version: 0.1.0
-Authors@R: person(given="Kazumi", family="WADA", role=c("aut", "cre"), email = "kazwd2008@gmail.com", comment=c(ORCID="0000-0002-9578-1588"))
+Authors@R: person(given="Kazumi", family="Wada", role=c("aut", "cre"), email = "kazwd2008@gmail.com", comment=c(ORCID="0000-0002-9578-1588"))
 Description: The functions included in this packages are for the paper by Wada, Takata and Tsubaki submitted for the speccial issue for uRos2019 of Austrian Journal of Statistics.  The title is "Generalized Robust Ratio Model for ImputTion".
 License: GPL-3
 Encoding: UTF-8
